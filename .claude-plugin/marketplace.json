@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "create-skill",
+  "owner": {
+    "name": "cbzehner",
+    "email": "chris@cbzehner.com"
+  },
+  "plugins": [
+    {
+      "name": "create-skill",
+      "source": "./",
+      "description": "Create Claude Code skills through structured interview with evaluation-first development",
+      "version": "1.0.0",
+      "author": {
+        "name": "cbzehner",
+        "email": "chris@cbzehner.com"
+      },
+      "category": "development",
+      "homepage": "https://github.com/cbzehner/claude-skill-create-skill"
+    }
+  ]
+}
