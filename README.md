@@ -35,13 +35,13 @@ Target: under 500 lines, no TODOs, ready to use immediately.
 ## Installation
 
 ```bash
-git clone https://github.com/cbzehner/claude-skill-create-skill ~/.claude/skills/create-skill
+git clone https://github.com/cbzehner/skill-create-skill ~/.claude/skills/create-skill
 ```
 
 Or symlink:
 
 ```bash
-ln -s /path/to/claude-skill-create-skill ~/.claude/skills/create-skill
+ln -s /path/to/skill-create-skill ~/.claude/skills/create-skill
 ```
 
 ## License
