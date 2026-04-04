@@ -3,7 +3,10 @@ name: create-skill
 description: Create reusable agent skills through structured interview. Use when
   formalizing a workflow, making a skill, slash command, or automating a process.
 argument-hint: "[workflow description]"
+arguments:
+  - description
 license: MIT
+effort: medium
 allowed-tools: AskUserQuestion Write Read Edit Bash Glob Grep
 ---
 
