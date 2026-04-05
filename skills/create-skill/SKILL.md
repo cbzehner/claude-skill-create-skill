@@ -1,7 +1,8 @@
 ---
 name: create-skill
-description: Create reusable agent skills through structured interview. Use when
-  formalizing a workflow, making a skill, slash command, or automating a process.
+description: Create and audit reusable agent skills. Use when formalizing a workflow,
+  making a skill, slash command, automating a process, or auditing/pruning an existing
+  skill for token efficiency.
 argument-hint: "[workflow description]"
 arguments:
   - description
@@ -25,7 +26,7 @@ Build skills through interview, not scaffolding.
 
 - **One-off scripts**: If the user just needs a bash script or utility, write it directly — don't wrap it in a skill
 - **Configuration changes**: Use `/update-config` for hooks, permissions, env vars, settings.json changes
-- **Editing an existing skill**: Read and edit the skill directly — don't re-run the full interview
+- **Editing an existing skill**: Read and edit the skill directly — don't re-run the full interview. To audit for token efficiency, use Step 7 below
 - **Documentation**: If the user wants docs, write docs — skills are executable workflows, not reference material
 
 ## What to Skip
@@ -94,6 +95,24 @@ Fix any failures before proceeding. Warnings are advisory.
 ### Step 6: Iterate
 
 Test and refine based on real usage. Follow the testing protocol in [references/validation-checklist.md](references/validation-checklist.md) — including additional discipline/process skill steps if applicable.
+
+---
+
+### Step 7: Audit
+
+Optimize an existing skill for token efficiency without behavioral regression. Use when a skill is bloated, after it's been in use long enough to identify dead weight, or as part of a periodic skill sweep.
+
+This step uses the autoresearch pattern: iterative single-change experiments with a ratchet (improvements kept, failures reverted). The protocol defends against systematic over-pruning through risk classification, steel-man testing, and a multi-advisor commit gate.
+
+See [references/audit-protocol.md](references/audit-protocol.md) for the full protocol: 4-step evaluation loop, escalation triggers, recovery procedures, and write-time prevention practices.
+
+**Quick reference — the 4-step loop per experiment:**
+1. **Classify** — Is this cut low-risk (narrator voice, restatements) or high-risk (behavioral instructions, boundaries, guardrails)?
+2. **Steel-Man** (high-risk) — Why was this here? Where is this behavior now encoded? Who reads this?
+3. **Probe** (high-risk) — 1-2 adversarial prompts targeting the specific behavior.
+4. **Streak Check** — After 4+ consecutive accepts, invert: argue for keeping the next content first.
+
+**Escalation → magi gate** when: reduction exceeds 40%, probe is ambiguous, pre-release, or you're unsure.
 
 ## Output Location
 
