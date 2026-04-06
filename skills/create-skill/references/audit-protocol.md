@@ -13,12 +13,13 @@ Uses the autoresearch pattern (Karpathy hill-climbing): single-change experiment
 
 ## Setup
 
-1. Read the target SKILL.md fully — this is your baseline
-2. `cp SKILL.md SKILL.md.baseline`
-3. Define 3-5 test prompts that exercise the skill's main paths and edge cases
-4. Initialize an experiment log: `experiment | status | word_count | description`
-5. Evaluate baseline: word count + verify all reference files exist
-6. `cp SKILL.md SKILL.md.current_best`
+1. **Gather usage data**: Use `/seance` to search past sessions for real invocations of the skill. Note which modes/paths are actually exercised, which features are never used, and what patterns appear. Real usage data informs which cuts are safe (unused features) vs. risky (frequently exercised paths).
+2. Read the target SKILL.md fully — this is your baseline
+3. `cp SKILL.md SKILL.md.baseline`
+4. Define 3-5 test prompts that exercise the skill's main paths and edge cases — informed by the usage data from step 1
+5. Initialize an experiment log: `experiment | status | word_count | description`
+6. Evaluate baseline: word count + verify all reference files exist
+7. `cp SKILL.md SKILL.md.current_best`
 
 ## The Loop (per experiment)
 
