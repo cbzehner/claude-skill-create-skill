@@ -22,6 +22,26 @@ Q: What type of skill is this?
 - When should it NOT trigger? (near-misses — adjacent tasks that seem similar but aren't)
 - Who uses it? (personal, team, public)
 
+### Always Recommend an Answer
+
+When this skill (or any skill it produces) interviews the user, every question must include a recommended answer. Never present an open-ended question without a default.
+
+```
+GOOD: "Should this skill bundle a script for parsing the output? I'd recommend
+       yes — the parsing logic is deterministic and would be regenerated on
+       every invocation otherwise."
+
+BAD:  "Should this skill bundle a script?"
+```
+
+**Why**: Open-ended questions stall the user. They have to think harder about a domain they may not know well. A recommended answer gives them something concrete to react to — accept, reject, or modify. The user is the editor, not the writer.
+
+**How to apply**:
+- Use multiple-choice (AskUserQuestion) where the option set is small and stable
+- For open questions, lead with "I'd recommend X because Y. Want to go with that or do something different?"
+- If you genuinely don't have a recommendation, state why ("I see two reasonable paths and don't know which fits your context — A vs B")
+- The recommendation should reflect the codebase or prior conversation, not a generic best practice
+
 ### Walk Through 3 Concrete Examples
 
 ```

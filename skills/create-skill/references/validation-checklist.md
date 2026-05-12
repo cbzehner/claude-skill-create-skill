@@ -68,20 +68,39 @@ Run these checks and report results to user:
    - No empty sections (every ## heading must have content)
    - No TODO/FIXME/placeholder text
 
+8. **Durable artifacts** (only for skills that produce GitHub issues, plans, briefs, design docs, or other persistent artifacts):
+   - The skill must instruct: no file paths in output
+   - The skill must instruct: no line numbers in output
+   - The skill must instruct: describe behaviors and contracts, not current code structure
+   - The skill must instruct: artifact should remain useful after a major refactor
+
+   **Why**: Issues, plans, and briefs sit in queues for days or weeks. The codebase moves underneath them. An issue that says "fix the bug on line 42 of handler.ts" is dead the moment that file is renamed. An issue that says "the SkillConfig type should accept an optional schedule field" survives.
+
+   **How to apply**: Skills like `triage-issue`, `write-prd`, `prd-to-plan`, or anything filing GitHub issues need this. Skills that only write code or run commands don't.
+
+9. **Triggerability harness** — capture enough data to benchmark skill selection later:
+   - 3 realistic prompts that should trigger the skill
+   - 2 near-miss prompts that should not trigger it
+   - 2-3 distinctive phrases from the SKILL.md body, not frontmatter, that prove the full skill loaded
+
+   **Why**: Description quality is only real if agents select the skill unaided. Body fingerprints make it possible to detect actual loading in Codex-style transcripts where frontmatter is always present.
+
 ### Report Format
 
 ```
 ## Validation Results
 
-| Check                    | Status | Notes                    |
-|--------------------------|--------|--------------------------|
-| Frontmatter complete     | PASS   |                          |
-| Description quality      | PASS   | 142 chars, third-person  |
-| Word count               | PASS   | 1,847 / 5,000            |
-| Rejection criteria       | PASS   | 3 anti-patterns, 2 skips |
-| References resolve       | PASS   | 2/2 links valid          |
-| Allowed-tools match      | WARN   | Bash used but not listed |
-| No forbidden patterns    | PASS   |                          |
+| Check                    | Status | Notes                       |
+|--------------------------|--------|-----------------------------|
+| Frontmatter complete     | PASS   |                             |
+| Description quality      | PASS   | 142 chars, third-person     |
+| Word count               | PASS   | 1,847 / 5,000               |
+| Rejection criteria       | PASS   | 3 anti-patterns, 2 skips    |
+| References resolve       | PASS   | 2/2 links valid             |
+| Allowed-tools match      | WARN   | Bash used but not listed    |
+| No forbidden patterns    | PASS   |                             |
+| Durable artifacts        | N/A    | Skill doesn't produce docs  |
+| Triggerability harness   | PASS   | 3 triggers, 2 anti-triggers |
 ```
 
 Fix any failures before proceeding. Warnings are advisory.

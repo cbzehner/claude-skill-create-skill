@@ -1,8 +1,12 @@
 ---
 name: create-skill
-description: Create and audit reusable agent skills. Use when formalizing a workflow,
-  making a skill, slash command, automating a process, or auditing/pruning an existing
-  skill for token efficiency.
+description: >-
+  Create, update, or audit agent skills and SKILL.md files. Use when the user
+  wants to make a new /command or /skill, improve skill frontmatter or trigger
+  pickup, benchmark whether a skill gets selected, formalize a repeating
+  workflow into reusable agent automation, prune token bloat, or validate an
+  existing skill. Produces skill definitions, not implementation plans.
+  Distinct from superpowers:writing-skills and superpowers:writing-plans.
 argument-hint: "[workflow description]"
 arguments:
   - description
