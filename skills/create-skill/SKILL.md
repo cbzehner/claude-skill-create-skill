@@ -6,7 +6,6 @@ description: >-
   pickup, benchmark whether a skill gets selected, formalize a repeating
   workflow into reusable agent automation, prune token bloat, or validate an
   existing skill. Produces skill definitions, not implementation plans.
-  Distinct from superpowers:writing-skills and superpowers:writing-plans.
 argument-hint: "[workflow description]"
 arguments:
   - description
@@ -46,6 +45,8 @@ Build skills through interview, not scaffolding.
 - **Interview-driven**: Questions reveal requirements better than templates
 - **Capture, don't invent**: Check if the current conversation already contains a workflow worth capturing — extract steps, tools used, and corrections before asking fresh questions
 - **3 examples minimum**: Specificity before abstraction
+- **Graph-aware by default**: For skills that compose with other skills, define required inputs, produced artifacts, and handoffs
+- **Additive-first migration**: When consolidating or replacing skills, create the new skill alongside old ones before editing or shimming the old entry points
 - **Explain the why**: Instructions that explain reasoning outperform rigid MUSTs. The agent is smart — give it context to make judgment calls, not just rules to follow
 - **Progressive disclosure**: Keep SKILL.md lean, split heavy content to reference files
 - **Lean over rigid**: Remove instructions that aren't pulling their weight. If test runs show the agent ignoring a section, cut it rather than adding enforcement
@@ -68,6 +69,8 @@ Gather concrete use cases to clarify what the skill does and when it fires. Use 
 
 Identify which bundled resources the skill needs beyond SKILL.md. Use the tool check, planning questions, and effort assessment from [references/interview-structure.md](references/interview-structure.md).
 
+If the skill is a router, replacement, consolidation, or part of a larger local workflow, apply [references/graph-and-migration-guidance.md](references/graph-and-migration-guidance.md) before writing it. Define its graph contract and use additive-first migration.
+
 ---
 
 ### Step 3: Init
@@ -83,6 +86,8 @@ Write the initial SKILL.md to `~/.claude/skills/{skill-name}/SKILL.md`.
 Refine the skill with edge cases, failure modes, and hardening. Use the completeness questions, validation questions, and hardening guidance from [references/validation-checklist.md](references/validation-checklist.md).
 
 See [references/techniques.md](references/techniques.md) for the full hardening guide.
+
+For graph-aware skills, add or tighten `## Handoffs` so missing inputs route to the skill that can produce them instead of being invented locally.
 
 Update the SKILL.md with refinements from this step.
 

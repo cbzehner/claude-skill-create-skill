@@ -85,6 +85,15 @@ Run these checks and report results to user:
 
    **Why**: Description quality is only real if agents select the skill unaided. Body fingerprints make it possible to detect actual loading in Codex-style transcripts where frontmatter is always present.
 
+10. **Graph contract** (for router, replacement, consolidation, or workflow-composing skills):
+   - Required inputs are explicit
+   - Produced artifact/decision/state is explicit
+   - `## Handoffs` exists and routes missing input to another skill or workflow
+   - Trigger rules are principle-based, not tied to a one-off migration example
+   - If replacing an existing skill, migration is additive-first unless the user explicitly asked to edit the old skill now
+
+   **Why**: Skills that compose as a web fail when they invent missing direction or silently duplicate another skill's job. A graph contract keeps each skill small and makes routing testable.
+
 ### Report Format
 
 ```
@@ -101,6 +110,7 @@ Run these checks and report results to user:
 | No forbidden patterns    | PASS   |                             |
 | Durable artifacts        | N/A    | Skill doesn't produce docs  |
 | Triggerability harness   | PASS   | 3 triggers, 2 anti-triggers |
+| Graph contract           | PASS   | Requires/produces/handoffs clear |
 ```
 
 Fix any failures before proceeding. Warnings are advisory.

@@ -21,6 +21,10 @@ Q: What type of skill is this?
 - When should it trigger? (specific scenarios, natural phrasings a user would say)
 - When should it NOT trigger? (near-misses — adjacent tasks that seem similar but aren't)
 - Who uses it? (personal, team, public)
+- What input must already be known before this skill can work well?
+- What artifact, decision, or state does this skill produce?
+- If required input is missing, which skill or workflow should produce it first?
+- Which downstream skill or workflow consumes this output?
 
 ### Always Recommend an Answer
 
@@ -78,6 +82,8 @@ Q: Does this skill need external tools?
 - What must it NEVER do? (hard constraints — but explain why, not just the rule)
 - Does it need dynamic context at invocation time? (current branch, project state, etc.)
 - Does it bundle supporting files? (scripts -> `scripts/`, reference docs -> `references/`, templates -> `assets/`)
+- Is this replacing or consolidating an existing skill? If yes, create it additively first; do not edit the old skill until real usage proves the new route works.
+- Does this skill need a `## Handoffs` section? If it composes with other skills, the answer is yes.
 
 ### Effort Assessment
 
