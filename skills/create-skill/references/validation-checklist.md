@@ -52,23 +52,30 @@ Run these checks and report results to user:
    - State WHAT the skill does AND WHEN to use it
    - Use third person
    - Include natural trigger phrases
+   - Express a principle-based boundary rather than only a list of examples
 
-3. **Word count** — SKILL.md must be under 5000 words. If over, extract content to `references/` files.
+3. **Principled routing language** — scan the description, first rule, routing table, and handoffs:
+   - Examples should support the rule, not define it
+   - Avoid migration-specific phrases in evergreen instructions
+   - Replace phrase lists with the underlying input condition where possible
+   - Keep concrete phrases in `## Examples`, trigger tests, or validation prompts
 
-4. **Rejection criteria** — verify both sections exist:
+4. **Word count** — SKILL.md must be under 5000 words. If over, extract content to `references/` files.
+
+5. **Rejection criteria** — verify both sections exist:
    - "When NOT to Use" with at least 2 near-miss anti-patterns
    - "What to Skip" with at least 1 exclusion
 
-5. **Resource references resolve** — every `[text](path)` link in SKILL.md must point to a file that exists. Check with Glob.
+6. **Resource references resolve** — every `[text](path)` link in SKILL.md must point to a file that exists. Check with Glob.
 
-6. **Allowed-tools match actual usage** — scan SKILL.md body for tool references (Read, Write, Bash, Edit, Glob, Grep, Task, AskUserQuestion, Agent, Skill, etc.). Every tool mentioned must appear in `allowed-tools`. Flag tools in frontmatter that aren't referenced in the body.
+7. **Allowed-tools match actual usage** — scan SKILL.md body for tool references (Read, Write, Bash, Edit, Glob, Grep, Task, AskUserQuestion, Agent, Skill, etc.). Every tool mentioned must appear in `allowed-tools`. Flag tools in frontmatter that aren't referenced in the body.
 
-7. **No forbidden patterns:**
+8. **No forbidden patterns:**
    - No "I can help..." or first-person descriptions
    - No empty sections (every ## heading must have content)
    - No TODO/FIXME/placeholder text
 
-8. **Durable artifacts** (only for skills that produce GitHub issues, plans, briefs, design docs, or other persistent artifacts):
+9. **Durable artifacts** (only for skills that produce GitHub issues, plans, briefs, design docs, or other persistent artifacts):
    - The skill must instruct: no file paths in output
    - The skill must instruct: no line numbers in output
    - The skill must instruct: describe behaviors and contracts, not current code structure
@@ -78,14 +85,14 @@ Run these checks and report results to user:
 
    **How to apply**: Skills like `triage-issue`, `write-prd`, `prd-to-plan`, or anything filing GitHub issues need this. Skills that only write code or run commands don't.
 
-9. **Triggerability harness** — capture enough data to benchmark skill selection later:
+10. **Triggerability harness** — capture enough data to benchmark skill selection later:
    - 3 realistic prompts that should trigger the skill
    - 2 near-miss prompts that should not trigger it
    - 2-3 distinctive phrases from the SKILL.md body, not frontmatter, that prove the full skill loaded
 
    **Why**: Description quality is only real if agents select the skill unaided. Body fingerprints make it possible to detect actual loading in Codex-style transcripts where frontmatter is always present.
 
-10. **Graph contract** (for router, replacement, consolidation, or workflow-composing skills):
+11. **Graph contract** (for router, replacement, consolidation, or workflow-composing skills):
    - Required inputs are explicit
    - Produced artifact/decision/state is explicit
    - `## Handoffs` exists and routes missing input to another skill or workflow
@@ -103,6 +110,7 @@ Run these checks and report results to user:
 |--------------------------|--------|-----------------------------|
 | Frontmatter complete     | PASS   |                             |
 | Description quality      | PASS   | 142 chars, third-person     |
+| Principled routing       | PASS   | Examples kept in tests      |
 | Word count               | PASS   | 1,847 / 5,000               |
 | Rejection criteria       | PASS   | 3 anti-patterns, 2 skips    |
 | References resolve       | PASS   | 2/2 links valid             |

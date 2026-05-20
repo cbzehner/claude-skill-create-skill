@@ -9,6 +9,7 @@ Most important field — the host agent uses the description alone to decide whe
 - State WHAT it does AND WHEN to use it
 - Be deliberately "pushy" — agents tend to under-trigger. Add phrases like "Use this whenever the user mentions X, even if they don't explicitly ask for it"
 - Prefer principle-based triggers over examples tied to the current repo or migration. Use examples in tests, not as the main boundary.
+- Describe the durable input condition, not only sample phrases. For example, "when purpose, audience, workflow, constraints, or acceptance criteria are unclear" is stronger than a list of app-building prompts.
 - Under 200 characters, but prioritize trigger coverage over brevity
 
 ## Instruction Language
@@ -60,7 +61,7 @@ allowed-tools: [tools identified in Step 2]
 
 ## Examples
 
-[3-5 concrete input/output pairs from Step 1]
+[3-5 concrete input/output pairs from Step 1. Examples validate the principle; they should not be the only definition of the skill boundary.]
 
 ## Handoffs
 

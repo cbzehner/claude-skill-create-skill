@@ -45,6 +45,7 @@ Build skills through interview, not scaffolding.
 - **Interview-driven**: Questions reveal requirements better than templates
 - **Capture, don't invent**: Check if the current conversation already contains a workflow worth capturing — extract steps, tools used, and corrections before asking fresh questions
 - **3 examples minimum**: Specificity before abstraction
+- **Principles before examples**: Use examples to discover the boundary, then write the reusable rule in principle-based language
 - **Graph-aware by default**: For skills that compose with other skills, define required inputs, produced artifacts, and handoffs
 - **Additive-first migration**: When consolidating or replacing skills, create the new skill alongside old ones before editing or shimming the old entry points
 - **Explain the why**: Instructions that explain reasoning outperform rigid MUSTs. The agent is smart — give it context to make judgment calls, not just rules to follow
@@ -63,6 +64,8 @@ Guide the user through 6 steps using AskUserQuestion. Use multiple choice where 
 
 Gather concrete use cases to clarify what the skill does and when it fires. Use the interview questions from [references/interview-structure.md](references/interview-structure.md) — skill type classification, core questions, and 3 concrete example walkthroughs.
 
+After examples, synthesize the general boundary. Do not leave the skill defined by a list of example phrases. The final trigger should describe the underlying input shape, missing context, artifact, or decision point that makes the skill appropriate.
+
 ---
 
 ### Step 2: Plan Reusable Contents
@@ -76,6 +79,8 @@ If the skill is a router, replacement, consolidation, or part of a larger local 
 ### Step 3: Init
 
 Create the initial SKILL.md from interview answers. Use the template, description writing guidelines, and instruction language rules from [references/skill-template.md](references/skill-template.md).
+
+Write descriptions and first rules in principle-based language. Keep concrete examples in `## Examples` and trigger tests, not in evergreen routing rules unless the phrase is itself the durable user vocabulary.
 
 Write the initial SKILL.md to `~/.claude/skills/{skill-name}/SKILL.md`.
 

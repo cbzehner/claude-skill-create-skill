@@ -62,6 +62,27 @@ Q: In example 1, what's the first thing you do?
 
 Extract common patterns and variations. Look for repeated work across examples — if all three involve the same helper logic, that's a signal to bundle a script.
 
+### Generalize The Boundary
+
+After the examples, translate them into a principle.
+
+Ask:
+
+- What do these examples have in common beyond the exact words the user used?
+- What required input or artifact makes this skill appropriate?
+- What missing input should route somewhere else first?
+- Which example details are just current-session accidents and should not appear in permanent instructions?
+
+Good boundary:
+
+> Use when the purpose, audience, workflow, constraints, or acceptance criteria are unclear before implementation.
+
+Weak boundary:
+
+> Use when the user says "build me an app" or "make a website."
+
+Examples should become tests. The skill's main trigger should become the durable rule those examples reveal.
+
 ## Step 2: Plan Reusable Contents
 
 ### External Tool Check
@@ -84,6 +105,7 @@ Q: Does this skill need external tools?
 - Does it bundle supporting files? (scripts -> `scripts/`, reference docs -> `references/`, templates -> `assets/`)
 - Is this replacing or consolidating an existing skill? If yes, create it additively first; do not edit the old skill until real usage proves the new route works.
 - Does this skill need a `## Handoffs` section? If it composes with other skills, the answer is yes.
+- Are any trigger rules example-led? Rewrite them as principle-based boundaries, then keep the examples in tests.
 
 ### Effort Assessment
 

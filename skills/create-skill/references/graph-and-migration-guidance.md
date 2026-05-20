@@ -59,6 +59,8 @@ description: >-
 
 Concrete trigger phrases are still useful, but they belong in test prompts and examples more than in broad routing rules.
 
+When you find yourself writing a list of prompts, ask what input condition they share. The shared condition belongs in `description`, `## First Rule`, `## Routing`, and `## Handoffs`. The prompts belong in validation.
+
 ## First-Rule Pattern
 
 For skills that can accidentally invent missing direction, add a first rule.
