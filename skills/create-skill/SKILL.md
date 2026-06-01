@@ -126,7 +126,7 @@ See [references/audit-protocol.md](references/audit-protocol.md) for the full pr
 3. **Probe** (high-risk) — 1-2 adversarial prompts targeting the specific behavior.
 4. **Streak Check** — After 4+ consecutive accepts, invert: argue for keeping the next content first.
 
-**Escalation → magi gate** when: reduction exceeds 40%, probe is ambiguous, pre-release, or you're unsure.
+**Escalation → `counsel --panel` gate** when: reduction exceeds 40%, probe is ambiguous, pre-release, or you're unsure. `magi` is an alias for this panel workflow.
 
 ## Output Location
 

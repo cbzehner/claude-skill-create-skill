@@ -65,7 +65,7 @@ Examples:
 - Cut calibration instructions → test with a simple question that should get a lightweight response
 - Cut sub-agent dispatch context → trace what the dispatched agent would actually receive
 
-If the probe passes, accept the cut. If ambiguous, escalate to magi gate.
+If the probe passes, accept the cut. If ambiguous, escalate to a `counsel --panel` gate.
 
 ### 4. Streak Check
 
@@ -87,20 +87,20 @@ Run the skill's primary test prompt against both the baseline and optimized vers
 - Does it produce equivalent quality output?
 - Does it handle edge cases (empty args, near-miss triggers)?
 
-### Escalation Triggers (→ magi gate)
+### Escalation Triggers (→ `counsel --panel` gate)
 
-The magi gate is a multi-advisor review (Gemini + Codex + Claude) of the full before/after diff. Required when:
+The panel gate is a multi-advisor review (Gemini + Codex + Claude) of the full before/after diff. Required when:
 
 - **Word reduction exceeds 40%** in a single audit pass — high cumulative risk of interaction effects between individually-safe cuts
 - **A probe result is ambiguous** — not clearly pass or fail
 - **Pre-release audit** of a frequently-used or high-impact skill
 - **Auditor's judgment** — when you're genuinely unsure
 
-The magi prompt should include: a summary of what was removed (not full files), the specific evaluation questions, and the instruction to be rigorous ("the point of this review is to catch things the optimizer rationalized away").
+The panel prompt should include: a summary of what was removed (not full files), the specific evaluation questions, and the instruction to be rigorous ("the point of this review is to catch things the optimizer rationalized away").
 
 ### Recovery: Selective Revert
 
-After magi review (or live comparison) flags issues:
+After panel review (or live comparison) flags issues:
 
 1. Restore flagged items in **compact form** — don't revert to baseline verbosity
 2. Record a **tombstone note** in the experiment log: what was cut, what was restored, why
@@ -138,4 +138,4 @@ For straightforward questions, apply the framework internally without exposing i
 - **"The model already knows this"** as justification for every cut — this is the primary over-pruning rationalization. Sometimes the model does already know. But calibration instructions, anti-failure-mode guardrails, and negative boundaries exist precisely because the model's default behavior isn't sufficient.
 - **Cutting frontmatter keywords for brevity** — description keywords are routing code. They determine whether the skill activates. Treat them like function signatures, not comments.
 - **Optimizing for word count alone** — the goal is minimum effective prompt, not minimum prompt. A skill that's 30% shorter but misses edge cases is worse, not better.
-- **Skipping the magi gate** to save time — the gate exists because the optimization loop has a demonstrated systematic bias. Budget for it.
+- **Skipping the panel gate** to save time — the gate exists because the optimization loop has a demonstrated systematic bias. Budget for it.

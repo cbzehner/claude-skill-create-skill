@@ -83,7 +83,7 @@ Run these checks and report results to user:
 
    **Why**: Issues, plans, and briefs sit in queues for days or weeks. The codebase moves underneath them. An issue that says "fix the bug on line 42 of handler.ts" is dead the moment that file is renamed. An issue that says "the SkillConfig type should accept an optional schedule field" survives.
 
-   **How to apply**: Skills like `triage-issue`, `write-prd`, `prd-to-plan`, or anything filing GitHub issues need this. Skills that only write code or run commands don't.
+   **How to apply**: Skills like `triage-issue`, `plan --prd`, `plan --from-prd`, or anything filing GitHub issues need this. Skills that only write code or run commands don't.
 
 10. **Triggerability harness** — capture enough data to benchmark skill selection later:
    - 3 realistic prompts that should trigger the skill
@@ -129,7 +129,7 @@ Fix any failures before proceeding. Warnings are advisory.
 2. **Test immediately** — invoke the skill on the first test prompt
 3. **Verify anti-triggers** — confirm near-miss prompts don't activate it
 4. **Read the transcript** — did the agent follow the skill or drift? If it ignored a section, that section needs rewriting (explain the why) or cutting (it wasn't pulling its weight)
-5. Optionally: `/magi "review this skill for clarity and completeness"`
+5. Optionally: `counsel --panel "review this skill for clarity and completeness"` (or `magi` as an alias)
 
 ### For Discipline/Process Skills (additional steps)
 
