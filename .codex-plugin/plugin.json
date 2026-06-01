@@ -1,0 +1,30 @@
+{
+  "name": "create-skill",
+  "version": "1.0.0",
+  "description": "Create, update, or audit agent skills and SKILL.md files. Use when the user wants to make a new /command or /skill, improve skill frontmatter or trigger pickup, benchmark whether a skill gets selected, formalize a repeating workflow into reusable agent automation, prune token bloat, or validate an existing skill. Produces skill definitions, not implementation plans.",
+  "author": {
+    "name": "cbzehner",
+    "url": "https://github.com/cbzehner"
+  },
+  "homepage": "https://github.com/cbzehner/skill-create-skill",
+  "repository": "https://github.com/cbzehner/skill-create-skill",
+  "license": "MIT",
+  "keywords": [
+    "create-skill",
+    "create",
+    "skill",
+    "agent-skill"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Create Skill",
+    "shortDescription": "Create, update, or audit agent skills and SKILL.md files. Use when the user wants to make a new /command or /skill, i...",
+    "longDescription": "Create, update, or audit agent skills and SKILL.md files. Use when the user wants to make a new /command or /skill, improve skill frontmatter or trigger pickup, benchmark whether a skill gets selected, formalize a repeating workflow into reusable agent automation, prune token bloat, or validate an existing skill. Produces skill definitions, not implementation plans.",
+    "developerName": "cbzehner",
+    "category": "Productivity",
+    "capabilities": [
+      "Productivity"
+    ],
+    "websiteURL": "https://github.com/cbzehner/skill-create-skill"
+  }
+}

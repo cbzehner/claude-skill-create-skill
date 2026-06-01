@@ -1,47 +1,58 @@
 # Create Skill
 
-Build Claude Code skills through structured interview.
+Create, update, or audit agent skills and SKILL.md files. Use when the user wants to make a new /command or /skill, improve skill frontmatter or trigger pickup, benchmark whether a skill gets selected, formalize a repeating workflow into reusable agent automation, prune token bloat, or validate an existing skill. Produces skill definitions, not implementation plans.
 
-## What It Does
+## Skill
 
-Create-skill guides you through a 4-phase interview to build skills. Instead of scaffolding templates, it asks non-obvious questions to reveal requirements, failure modes, and edge cases.
+This repository packages one portable agent skill:
 
-## Usage
+- `create-skill` - Create, update, or audit agent skills and SKILL.md files. Use when the user wants to make a new /command or /skill, improve skill frontmatter or trigger pickup, benchmark whether a skill gets selected, formalize a repeating workflow into reusable agent automation, prune token bloat, or validate an existing skill. Produces skill definitions, not implementation plans.
 
-```
-/create-skill
-```
+The canonical skill body lives at `skills/create-skill/SKILL.md`. Keep behavior changes there; keep this README focused on installation and packaging.
 
-Then answer questions through 4 phases:
+## Install
 
-1. **Shape** - Problem space, triggers, audience
-2. **Flow** - 3 concrete examples walked step-by-step
-3. **Detail** - Tools, dependencies, constraints
-4. **Completeness** - Error handling, persistence, anti-patterns
-
-## Philosophy
-
-- **Interview-driven**: Questions reveal requirements better than templates
-- **Non-obvious questions**: Ask about failure modes, not obvious inputs
-- **3 examples minimum**: Specificity before abstraction
-- **Progressive disclosure**: Keep SKILL.md lean, split heavy content to references/
-
-## Output
-
-Generates a complete SKILL.md at `~/.claude/skills/{skill-name}/SKILL.md`
-
-Target: under 500 lines, no TODOs, ready to use immediately.
-
-## Installation
+Clone the repository, then run the installer:
 
 ```bash
-git clone https://github.com/cbzehner/skill-create-skill ~/.claude/skills/create-skill
+git clone https://github.com/cbzehner/skill-create-skill.git
+cd skill-create-skill
+./install.sh all
 ```
 
-Or symlink:
+Install targets:
 
-```bash
-ln -s /path/to/skill-create-skill ~/.claude/skills/create-skill
+- `./install.sh claude` -> `~/.claude/skills/create-skill`
+- `./install.sh codex` -> `~/.codex/skills/create-skill`
+- `./install.sh agents` -> `~/.agents/skills/create-skill` for generic agent harnesses such as Pi/Hermes-style setups
+- `./install.sh opencode` -> `~/.config/opencode/skills/create-skill`
+- `./install.sh all --copy` copies files instead of symlinking
+
+Manual installation is just a symlink or copy from `skills/create-skill` into your agent's skills directory.
+
+## Compatibility
+
+This repo uses the common `skills/<name>/SKILL.md` layout so agents that understand file-based skills can load it directly. Host-specific metadata is included where useful:
+
+- Claude Code: `.claude-plugin/plugin.json` and direct `~/.claude/skills` install
+- Codex CLI: `.codex-plugin/plugin.json` with `skills: "./skills/"` and direct `~/.codex/skills` install
+- Other agents: direct install to the agent's skills directory; unsupported frontmatter fields can be ignored
+
+Some skills mention optional host tools such as `Task`, `Agent`, `Skill`, MCP tools, or browser automation CLIs. On hosts that do not provide those tools, adapt to equivalent local capabilities and keep the same workflow intent.
+
+## Public Safety
+
+These repositories are public. Do not commit organization-specific instructions, private repository names, secrets, tokens, cookies, raw session logs, customer data, or machine-local paths. Use environment variables and generic paths in examples.
+
+## Repository Layout
+
+```text
+.claude-plugin/plugin.json   # Claude plugin metadata
+.codex-plugin/plugin.json    # Codex plugin metadata
+install.sh                   # Symlink/copy installer for common agent skill dirs
+skills/create-skill/SKILL.md
+README.md
+LICENSE
 ```
 
 ## License
