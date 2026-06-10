@@ -92,7 +92,7 @@ Run these checks and report results to user:
 
    **Why**: Description quality is only real if agents select the skill unaided. Body fingerprints make it possible to detect actual loading in Codex-style transcripts where frontmatter is always present.
 
-   **How to apply**: Store the prompts in `<skill-dir>/tests/probes.yaml` (superpowers-bench-compatible: `prompt`, `expected_skills`, optional `trigger_hint`), then run them as a live probe panel per [evaluation-protocol.md](evaluation-protocol.md) and report F1. The stored file is what makes Step 6 and future re-evaluation cheap instead of reconstructed from scratch.
+   **How to apply**: Store the prompts in `<skill-dir>/tests/probes.yaml` (superpowers-bench-compatible: `prompt`, `expected_skills`, optional `trigger_hint`) and the body fingerprints in `<skill-dir>/tests/fingerprints.txt` (one phrase per line — `usage-stats.sh` greps these to measure real body loading across Claude and Codex transcripts). Then run the probes as a live probe panel per [evaluation-protocol.md](evaluation-protocol.md) and report F1. The stored files are what make Step 6 and future re-evaluation cheap instead of reconstructed from scratch.
 
 11. **Graph contract** (for router, replacement, consolidation, or workflow-composing skills):
    - Required inputs are explicit

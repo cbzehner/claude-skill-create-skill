@@ -7,10 +7,15 @@ Order checks by determinism: scripts first, probe panels second, LLM judging las
 ## Metrics
 
 1. **Token profile** — `scripts/token-profile.sh <skill-dir>`. Reports tokens by load tier: frontmatter (always in the skill listing), SKILL.md (every invocation), references (on demand).
-2. **Usage stats** — `scripts/usage-stats.sh <skill-name>`. Session counts and per-reference read rates from local transcripts. Approximate, but enough to compute expected load.
+2. **Usage stats** — `scripts/usage-stats.sh <skill-name>`. Session counts and per-reference read rates from local transcripts, across both harnesses (Claude Code projects and Codex sessions). Approximate, but enough to compute expected load.
 3. **Expected load** — `SKILL.md tokens + Σ(reference tokens × read rate)`. This is the number that matters: optimization priority follows expected load, not file size. A cut in a reference read in 2% of sessions is worth 2% of the same cut in SKILL.md. Conversely, references are cheap places to add depth.
 4. **Trigger-selection F1** — probe panel below.
 5. **Behavioral adherence** — binary criteria checks below.
+6. **Wild adherence** — what real sessions did, not what lab probes predict. Fingerprints in `<skill-dir>/tests/fingerprints.txt` (2-3 distinctive body phrases, one per line) let `usage-stats.sh` distinguish "body actually loaded" from listing noise — essential for Codex transcripts, where every session contains every description. Two signals to read from the output:
+   - **Path drop-off**: grep for step/mode markers across invoking sessions to find where workflows stall (this is how a 39% Step 5 abandonment rate was found). Fix drop-offs structurally — change what the step produces or requires — not with exhortation.
+   - **Reference re-reads**: a reference read 2+ times in one session signals bad structure (missing summary in SKILL.md, or a file serving two unrelated purposes).
+
+   Do not bother summing per-invocation token usage from transcript usage blocks: it conflates skill cost with task size and cache behavior. The controllable quantity is what the skill injects into context, and metrics 1-3 already measure that.
 
 ## Probe Panel (trigger F1)
 
@@ -34,6 +39,15 @@ Score precision, recall, and F1 for the target skill, with per-probe routing in 
 When changing a description, re-run the same panel before and after. Never compare across different probe sets, and never edit probe wording between runs — even an innocuous added sentence (e.g., cost framing) changes routing behavior and invalidates the comparison.
 
 Selection is stochastic: before treating a single surprising result as signal, re-run that probe 3× on both the old and new description with identical wording. A probe that flips occasionally under both versions is borderline by design — note its false-positive rate in `probes.yaml` rather than chasing it with description changes.
+
+### Cross-Harness Coverage
+
+Skill selection is harness- and model-dependent: Codex truncates long descriptions first and routes with a different model, so an F1 of 1.0 under Claude does not transfer. If the skill is installed for both harnesses, run the panel for both:
+
+- **Claude**: parallel subagents via the Agent tool, as above.
+- **Codex**: run each probe through `codex exec --skip-git-repo-check -s read-only '<listing + probe + JSON answer instruction>'` (verified working; ~30s and ~13k tokens per probe), or graduate `tests/probes.yaml` to superpowers-bench, which has codex conditions built in.
+
+Tune the description to satisfy the weaker harness — and re-run *both* panels after any description change, since a fix for one can regress the other.
 
 ## Adherence Checks
 
