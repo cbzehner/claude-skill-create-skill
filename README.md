@@ -1,3 +1,5 @@
+> **Moved:** this skill now lives in [cbzehner/skills](https://github.com/cbzehner/skills) under `skills/create-skill/`. This repo is archived and read-only.
+
 # Create Skill
 
 Create, update, and audit agent skills. It turns recurring workflows into lean `SKILL.md` files with good trigger text, useful boundaries, and enough validation to know the skill will load.
