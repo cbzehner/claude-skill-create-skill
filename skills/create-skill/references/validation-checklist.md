@@ -22,7 +22,7 @@ Q: If the skill fails, what should happen?
 - "Give me 2 prompts that should NOT trigger it"
 - "For the first test prompt, what does good output look like?"
 
-Guide the user toward **realistic** test prompts — concrete, with file paths, personal context, casual phrasing, maybe typos. Not abstract ("format this data") but specific ("ok so I have this CSV in ~/Downloads called q4-sales.xlsx and I need to...").
+Guide the user toward **realistic** test prompts — concrete, with file paths, casual phrasing, maybe typos. Not abstract ("format this data") but specific ("ok so I have this CSV in ~/Downloads called q4-sales.xlsx and I need to..."). Invent the specifics: prompts stored in `tests/` travel with the skill repo, so no real proper names from the user's environment (employer, internal services, usernames, personal domains) and no business-domain vocabulary that fingerprints a workplace — use fictional stand-ins of equal concreteness.
 
 Anti-trigger prompts should be **near-misses**: queries that share keywords with the skill but actually need something different.
 

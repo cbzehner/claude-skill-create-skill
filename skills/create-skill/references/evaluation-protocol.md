@@ -19,7 +19,11 @@ Order checks by determinism: scripts first, probe panels second, LLM judging las
 
 ## Probe Panel (trigger F1)
 
+Skills with `disable-model-invocation: true` skip this section entirely — they are slash-command-only, their description never competes in routing, so trigger F1 is undefined. Token profile and adherence are their only metrics. (Corollary: a skill whose triggers are all explicit user vocabulary can set that flag instead of fighting for routing.)
+
 Probes live in `<skill-dir>/tests/probes.yaml` — superpowers-bench-compatible entries of `prompt`, `expected_skills`, optional `trigger_hint`. Minimum 6 should-trigger and 4 near-miss probes. Write them realistically: casual phrasing, concrete paths, no skill names — a probe that quotes the description tests nothing.
+
+Invent every identifying detail. Probes ship with the skill, often to public repos. No real proper names from the author's environment: employer or personal org/repo names, internal service or product names, team names, personal domains or URLs, issue/PR numbers, or the employer's business-domain vocabulary (an internal repo name next to its actual domain terms fingerprints a workplace even when each looks generic alone). Realistic-but-fictional stand-ins of equal concreteness (`acme/billing-api`, `~/work/storefront-api`, `staging.acme.dev`) test routing just as well. Before committing probes, grep them for the user's employer, username, projects, and domains.
 
 For each probe, spawn an independent subagent (Agent tool) given:
 - a skill listing — the target skill's name + description verbatim, plus 10-15 plausible confuser skills with their real descriptions
