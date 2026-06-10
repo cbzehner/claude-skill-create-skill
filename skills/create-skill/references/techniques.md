@@ -12,7 +12,7 @@ Not all skills need all techniques. Match hardening to skill type.
 | **Reference** | API docs, templates, specs | Skip | Light | Clarity only | None |
 | **Always-on** | Napkin, theorist, session init | Skip | Light | Lightweight nudges | None |
 
-Determine skill type in Phase 1 (Shape). This drives which techniques apply.
+Determine skill type in Step 1. This drives which techniques apply.
 
 ## Technique 1: Anti-Rationalization Tables
 
@@ -38,7 +38,7 @@ Determine skill type in Phase 1 (Shape). This drives which techniques apply.
 | "Being pragmatic" | Skipping steps isn't pragmatic, it's gambling. |
 ```
 
-**When to add:** After Phase 5 testing reveals the agent skipping steps. Start with an empty table and populate it from real observations — don't invent hypothetical rationalizations.
+**When to add:** After Step 6 testing reveals the agent skipping steps. Start with an empty table and populate it from real observations — don't invent hypothetical rationalizations.
 
 ## Technique 2: Baseline Testing (The RED Phase)
 
@@ -57,7 +57,7 @@ Determine skill type in Phase 1 (Shape). This drives which techniques apply.
    - Rationalized a shortcut
 4. Each observation becomes a requirement in the skill
 
-**This extends Phase 5 (Validate).** Current Phase 5 tests trigger/anti-trigger and output quality. Baseline testing adds: "does the skill actually change behavior?"
+**This extends Step 6 (Iterate).** Step 6 tests trigger/anti-trigger and output quality. Baseline testing adds: "does the skill actually change behavior?"
 
 ## Technique 3: Pressure Testing
 

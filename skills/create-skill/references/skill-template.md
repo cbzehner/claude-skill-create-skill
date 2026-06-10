@@ -10,7 +10,8 @@ Most important field — the host agent uses the description alone to decide whe
 - Be deliberately "pushy" — agents tend to under-trigger. Add phrases like "Use this whenever the user mentions X, even if they don't explicitly ask for it"
 - Prefer principle-based triggers over examples tied to the current repo or migration. Use examples in tests, not as the main boundary.
 - Describe the durable input condition, not only sample phrases. For example, "when purpose, audience, workflow, constraints, or acceptance criteria are unclear" is stronger than a list of app-building prompts.
-- Under 200 characters, but prioritize trigger coverage over brevity
+- Target under ~350 characters (hard limit 1024), trigger words front-loaded — but prioritize trigger coverage over brevity
+- State WHEN to trigger, not a summary of the workflow — a workflow-summary description tempts the agent to follow the description alone and skip reading the body
 
 ## Instruction Language
 
@@ -25,7 +26,7 @@ Most important field — the host agent uses the description alone to decide whe
 ```yaml
 ---
 name: skill-name
-description: [third-person, trigger-word-rich, WHAT + WHEN, deliberately pushy, under 200 chars]
+description: [third-person, trigger-word-rich, WHAT + WHEN, deliberately pushy, under ~350 chars]
 argument-hint: "[expected arguments]"
 allowed-tools: [tools identified in Step 2]
 # effort: high          # uncomment for complex orchestration/reasoning tasks

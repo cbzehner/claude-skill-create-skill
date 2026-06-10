@@ -11,7 +11,7 @@ arguments:
   - description
 license: MIT
 effort: medium
-allowed-tools: AskUserQuestion Write Read Edit Bash Glob Grep
+allowed-tools: AskUserQuestion Write Read Edit Bash Glob Grep Agent Skill
 ---
 
 # /create-skill
@@ -43,7 +43,7 @@ Build skills through interview, not scaffolding.
 ## Philosophy
 
 - **Interview-driven**: Questions reveal requirements better than templates
-- **Capture, don't invent**: Check if the current conversation already contains a workflow worth capturing — extract steps, tools used, and corrections before asking fresh questions
+- **Capture, don't invent**: Extract workflows already present in the conversation before asking fresh questions
 - **3 examples minimum**: Specificity before abstraction
 - **Principles before examples**: Use examples to discover the boundary, then write the reusable rule in principle-based language
 - **Graph-aware by default**: For skills that compose with other skills, define required inputs, produced artifacts, and handoffs
@@ -54,7 +54,7 @@ Build skills through interview, not scaffolding.
 
 ## Workflow
 
-Guide the user through 6 steps using AskUserQuestion. Use multiple choice where possible. Ask one question at a time. Go deep.
+Guide the user through Steps 1-6 using AskUserQuestion (Step 7 is a standalone audit mode for existing skills). Use multiple choice where possible. Ask one question at a time. Go deep.
 
 **Before starting**: Check if the current conversation already contains a workflow the user wants to capture. If so, extract the tools used, the sequence of steps, corrections the user made, and input/output formats observed. Present this as a starting point — the user fills gaps and confirms.
 
@@ -82,7 +82,7 @@ Create the initial SKILL.md from interview answers. Use the template, descriptio
 
 Write descriptions and first rules in principle-based language. Keep concrete examples in `## Examples` and trigger tests, not in evergreen routing rules unless the phrase is itself the durable user vocabulary.
 
-Write the initial SKILL.md to `~/.claude/skills/{skill-name}/SKILL.md`.
+Write the initial SKILL.md to `~/.claude/skills/{skill-name}/SKILL.md`. Only create reference files if content exceeds 300 lines or has distinct reference material.
 
 ---
 
@@ -128,8 +128,3 @@ See [references/audit-protocol.md](references/audit-protocol.md) for the full pr
 
 **Escalation → `counsel --panel` gate** when: reduction exceeds 40%, probe is ambiguous, pre-release, or you're unsure. `magi` is an alias for this panel workflow.
 
-## Output Location
-
-Write to the target skill directory's `SKILL.md` (for example `~/.claude/skills/{skill-name}/SKILL.md`).
-
-Only create reference files if content exceeds 300 lines or has distinct reference material.

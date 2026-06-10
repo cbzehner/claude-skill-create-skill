@@ -43,12 +43,12 @@ Run these checks and report results to user:
 
 1. **Frontmatter completeness** — verify all required fields present:
    - `name` (required, must match directory name)
-   - `description` (required, under 200 chars, third-person, includes trigger words)
+   - `description` (required, third-person, trigger words front-loaded)
    - `allowed-tools` (required, must list every tool the skill body references)
    - `argument-hint` (recommended if skill takes arguments)
 
 2. **Description quality** — the description must:
-   - Be under 200 characters
+   - Front-load trigger words and target under ~350 characters (hard limit 1024; Codex-style harnesses truncate long descriptions first)
    - State WHAT the skill does AND WHEN to use it
    - Use third person
    - Include natural trigger phrases
