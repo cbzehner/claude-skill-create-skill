@@ -13,12 +13,12 @@ Uses the autoresearch pattern (Karpathy hill-climbing): single-change experiment
 
 ## Setup
 
-1. **Gather usage data**: Use `/seance` to search past sessions for real invocations of the skill. Note which modes/paths are actually exercised, which features are never used, and what patterns appear. Real usage data informs which cuts are safe (unused features) vs. risky (frequently exercised paths).
+1. **Gather usage data**: Run `scripts/usage-stats.sh <skill-name>` (or `/seance` for deeper narrative) to find real invocations: which modes/paths are exercised, which features are never used, how often each reference file is actually read. Usage data informs which cuts are safe (unused features) vs. risky (frequently exercised paths) — and where cuts pay off at all: expected savings = tokens × load probability, so SKILL.md (loaded every invocation) dominates references (typically read in <10% of sessions).
 2. Read the target SKILL.md fully — this is your baseline
 3. `cp SKILL.md SKILL.md.baseline`
-4. Define 3-5 test prompts that exercise the skill's main paths and edge cases — informed by the usage data from step 1
+4. Define 3-5 test prompts that exercise the skill's main paths and edge cases — reuse `tests/probes.yaml` if it exists, informed by the usage data from step 1
 5. Initialize an experiment log: `experiment | status | word_count | description`
-6. Evaluate baseline: word count + verify all reference files exist
+6. Evaluate baseline: `scripts/token-profile.sh <skill-dir>` + verify all reference files exist
 7. `cp SKILL.md SKILL.md.current_best`
 
 ## The Loop (per experiment)
@@ -81,7 +81,7 @@ This is a circuit breaker, not a permanent state. After the inverted evaluation,
 
 ### Live Comparison
 
-Run the skill's primary test prompt against both the baseline and optimized version. Use parallel agents so the comparison is blind (neither knows it's being compared). Check:
+Run the skill's primary test prompt against both the baseline and optimized version. Use parallel agents so the comparison is blind (neither knows it's being compared) — stage the variants under neutral file names and score deterministic adherence criteria first, per [evaluation-protocol.md](evaluation-protocol.md). Check:
 
 - Does the optimized version hit the same modes/paths?
 - Does it produce equivalent quality output?

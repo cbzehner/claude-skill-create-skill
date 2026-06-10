@@ -92,6 +92,8 @@ Run these checks and report results to user:
 
    **Why**: Description quality is only real if agents select the skill unaided. Body fingerprints make it possible to detect actual loading in Codex-style transcripts where frontmatter is always present.
 
+   **How to apply**: Store the prompts in `<skill-dir>/tests/probes.yaml` (superpowers-bench-compatible: `prompt`, `expected_skills`, optional `trigger_hint`), then run them as a live probe panel per [evaluation-protocol.md](evaluation-protocol.md) and report F1. The stored file is what makes Step 6 and future re-evaluation cheap instead of reconstructed from scratch.
+
 11. **Graph contract** (for router, replacement, consolidation, or workflow-composing skills):
    - Required inputs are explicit
    - Produced artifact/decision/state is explicit
@@ -130,6 +132,8 @@ Fix any failures before proceeding. Warnings are advisory.
 3. **Verify anti-triggers** — confirm near-miss prompts don't activate it
 4. **Read the transcript** — did the agent follow the skill or drift? If it ignored a section, that section needs rewriting (explain the why) or cutting (it wasn't pulling its weight)
 5. Optionally: `counsel --panel "review this skill for clarity and completeness"` (or `magi` as an alias)
+
+**If iteration must be deferred** (the skill needs real usage over time): say so explicitly — a passing Step 5 table is not completion — and give the user a re-entry path: `/create-skill iterate <skill-name> against tests/probes.yaml`. Roughly 40% of historical creation sessions ended at Step 5 with the skill never exercised; the deferral contract exists to close that gap.
 
 ### For Discipline/Process Skills (additional steps)
 

@@ -3,9 +3,11 @@ name: create-skill
 description: >-
   Create, update, or audit agent skills and SKILL.md files. Use when the user
   wants to make a new /command or /skill, improve skill frontmatter or trigger
-  pickup, benchmark whether a skill gets selected, formalize a repeating
-  workflow into reusable agent automation, prune token bloat, or validate an
-  existing skill. Produces skill definitions, not implementation plans.
+  pickup, benchmark whether a skill gets selected, evaluate a skill
+  quantitatively (token cost, trigger F1, behavioral adherence), formalize a
+  repeating workflow into reusable agent automation, prune token bloat, or
+  validate an existing skill. Produces skill definitions, not implementation
+  plans.
 argument-hint: "[workflow description]"
 arguments:
   - description
@@ -54,7 +56,7 @@ Build skills through interview, not scaffolding.
 
 ## Workflow
 
-Guide the user through Steps 1-6 using AskUserQuestion (Step 7 is a standalone audit mode for existing skills). Use multiple choice where possible. Ask one question at a time. Go deep.
+Guide the user through Steps 1-6 using AskUserQuestion (Steps 7-8 are standalone audit and evaluation modes for existing skills). Use multiple choice where possible. Ask one question at a time. Go deep.
 
 **Before starting**: Check if the current conversation already contains a workflow the user wants to capture. If so, extract the tools used, the sequence of steps, corrections the user made, and input/output formats observed. Present this as a starting point — the user fills gaps and confirms.
 
@@ -104,11 +106,15 @@ Validate the skill meets quality standards before declaring it ready. Run all ch
 
 Fix any failures before proceeding. Warnings are advisory.
 
+A passing table is proof of form, not function. Before moving on: store the check #10 trigger probes in the skill's `tests/probes.yaml`, then run them as a live probe panel ([references/evaluation-protocol.md](references/evaluation-protocol.md)) and report routing results alongside the validation table.
+
 ---
 
 ### Step 6: Iterate
 
 Test and refine based on real usage. Follow the testing protocol in [references/validation-checklist.md](references/validation-checklist.md) — including additional discipline/process skill steps if applicable.
+
+Run the first test prompt now, in this session — most regressions surface on first contact, and a skill that has never executed is unproven. If the skill genuinely can't be exercised yet (it needs real usage over time or external events), don't end silently after Step 5: say the skill is packaged but unproven, and hand the user a re-entry line — `/create-skill iterate <skill-name> against tests/probes.yaml` — for after first real use.
 
 ---
 
@@ -127,4 +133,12 @@ See [references/audit-protocol.md](references/audit-protocol.md) for the full pr
 4. **Streak Check** — After 4+ consecutive accepts, invert: argue for keeping the next content first.
 
 **Escalation → `counsel --panel` gate** when: reduction exceeds 40%, probe is ambiguous, pre-release, or you're unsure. `magi` is an alias for this panel workflow.
+
+---
+
+### Step 8: Evaluate
+
+Measure a skill quantitatively without changing it: token profile and expected load, real usage stats from transcripts, trigger-selection F1 from a probe panel, and behavioral adherence against binary criteria. Use at Step 5 packaging, before and after a Step 7 audit (changes should be eval-gated, not vibes-gated), or as a periodic health check.
+
+See [references/evaluation-protocol.md](references/evaluation-protocol.md) for the protocol. Deterministic measurements are bundled as scripts: `scripts/token-profile.sh <skill-dir>` and `scripts/usage-stats.sh <skill-name>`.
 
